@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <title>Virgin Voyages Interactive Deck Plans | The Cruise Boys®</title>
+  <meta name="description" content="Pick a Virgin Voyages ship and deck, tap any cabin for its category, The Cruise Boys® Score and bed position, and highlight cabin types on the official deck plan. From The Cruise Boys® - powered by KVI Travel." />
+  <link rel="canonical" href="https://thecruiseboys.github.io/deck-plans/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Virgin Voyages Interactive Deck Plans | The Cruise Boys®" />
+  <meta property="og:description" content="Pick a Virgin Voyages ship and deck, tap any cabin, and highlight cabin types on the official deck plan. From The Cruise Boys® - powered by KVI Travel." />
+  <meta property="og:url" content="https://thecruiseboys.github.io/deck-plans/" />
+  <meta property="og:image" content="https://thecruiseboys.github.io/deck-plans/assets/tcb-logo-horizontal.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Standalone preview page only */
+    html, body.tcb-deck-page { overflow-x: hidden; }
+    body.tcb-deck-page { margin: 0; padding: 24px 16px; background: #16232c; color: #2c3f51; }
+  </style>
+</head>
+<body class="tcb-deck-page">
+<!-- TCB DECK PLANS START -->
+<style>
+
+    .tcb-cabin-lookup,
+    .tcb-cabin-lookup * { box-sizing: border-box; }
+    .tcb-cabin-lookup {
+      --tcb-navy: #2c3f51;
+      --tcb-navy-deep: #1b2833;
+      --tcb-navy-mid: #354a5e;
+      --tcb-blue: #0089e5;
+      --tcb-blue-btn: #0074c2; /* official blue, darkened for 4.5:1 contrast with white */
+      --tcb-orange: #f38c2b;
+      --tcb-white: #ffffff;
+      --tcb-card: #f7f9fb;
+      --tcb-line: rgba(44, 63, 81, 0.14);
+      --tcb-line-light: rgba(255, 255, 255, 0.16);
+      --tcb-foam: #f4f7fa;
+      --tcb-muted: #c5d0d8;
+      --tcb-font-display: "Poppins", "Helvetica Neue", Arial, sans-serif;
+      --tcb-font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
+      font-family: var(--tcb-font-body);
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--tcb-foam);
+      background: var(--tcb-navy);
+      border-radius: 20px;
+      max-width: 1080px;
+      margin: 0 auto;
+      overflow-x: hidden;
+      width: 100%;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+      -webkit-font-smoothing: antialiased;
+    }
+    .tcb-cabin-lookup button,
+    .tcb-cabin-lookup input,
+    .tcb-cabin-lookup select { font-family: inherit; }
+    .tcb-cabin-lookup h1,
+    .tcb-cabin-lookup h2,
+    .tcb-cabin-lookup h3 {
+      font-family: var(--tcb-font-display);
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+    .tcb-cabin-lookup a { color: #b8ddff; }
+    .tcb-cabin-lookup a:hover { color: var(--tcb-white); }
+
+    /* Logo + title sit on a light card so the white-background marks remain crisp */
+    .tcb-cabin-lookup .tcb-masthead {
+      background: var(--tcb-white);
+      color: var(--tcb-navy);
+      padding: 22px 24px 20px;
+      border-bottom: 4px solid var(--tcb-orange);
+    }
+    .tcb-cabin-lookup .tcb-logo-horizontal,
+    .tcb-cabin-lookup .tcb-logo-square { display: block; }
+    .tcb-cabin-lookup .tcb-logo-horizontal {
+      height: 56px;
+      width: auto;
+      max-width: min(280px, 70vw);
+      object-fit: contain;
+      background: #fff;
+    }
+    .tcb-cabin-lookup .tcb-logo-square {
+      display: none;
+      height: 56px;
+      width: 56px;
+      object-fit: contain;
+      background: #fff;
+    }
+    .tcb-cabin-lookup .tcb-masthead h1 {
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 700;
+      color: var(--tcb-navy);
+      margin: 14px 0 6px;
+      line-height: 1.15;
+    }
+    .tcb-cabin-lookup .tcb-brand-line {
+      font-family: var(--tcb-font-display);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--tcb-navy);
+      margin: 0;
+    }
+    .tcb-cabin-lookup .tcb-lead {
+      margin: 8px 0 0;
+      color: #3d5163;
+      max-width: 62ch;
+    }
+
+    .tcb-cabin-lookup .tcb-body { padding: 22px 24px 24px; }
+    .tcb-cabin-lookup .tcb-ships {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .tcb-cabin-lookup .tcb-ships button {
+      appearance: none;
+      border: 1px solid var(--tcb-line-light);
+      background: var(--tcb-navy-deep);
+      color: var(--tcb-foam);
+      border-radius: 12px;
+      padding: 10px 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .tcb-cabin-lookup .tcb-ships button:hover,
+    .tcb-cabin-lookup .tcb-ships button:focus-visible {
+      border-color: var(--tcb-blue);
+      outline: none;
+    }
+    .tcb-cabin-lookup .tcb-ships button.is-active {
+      background: var(--tcb-blue-btn);
+      border-color: var(--tcb-blue-btn);
+      color: var(--tcb-white);
+    }
+    .tcb-cabin-lookup .tcb-search-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .tcb-cabin-lookup label.tcb-sr,
+    .tcb-cabin-lookup .tcb-label {
+      display: block;
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+    .tcb-cabin-lookup .tcb-search-row input {
+      width: 100%;
+      border: 1px solid var(--tcb-line-light);
+      background: var(--tcb-navy-deep);
+      color: var(--tcb-white);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 18px;
+      font-family: var(--tcb-font-display);
+      font-weight: 600;
+    }
+    .tcb-cabin-lookup .tcb-search-row input:focus {
+      outline: 2px solid var(--tcb-blue);
+      outline-offset: 1px;
+    }
+    .tcb-cabin-lookup .tcb-search-row button {
+      border: 0;
+      background: var(--tcb-blue-btn);
+      color: var(--tcb-white);
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-weight: 700;
+      font-family: var(--tcb-font-display);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .tcb-cabin-lookup .tcb-search-row button:hover,
+    .tcb-cabin-lookup .tcb-search-row button:focus-visible {
+      background: #0068b5;
+      outline: none;
+    }
+    .tcb-cabin-lookup .tcb-hint { color: var(--tcb-muted); font-size: 13px; margin: 0 0 16px; }
+    .tcb-cabin-lookup .tcb-filters { display: flex; flex-wrap: wrap; gap: 8px 10px; margin-bottom: 16px; align-items: end; }
+    .tcb-cabin-lookup .tcb-filter {
+      flex: 1 1 160px;
+      min-width: 0;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .tcb-cabin-lookup .tcb-filter-check {
+      flex: 0 1 auto;
+      justify-content: flex-end;
+    }
+    .tcb-cabin-lookup .tcb-filter-check .tcb-check {
+      width: auto;
+      white-space: nowrap;
+    }
+    .tcb-cabin-lookup .tcb-filters select {
+      background: var(--tcb-navy-deep);
+      color: var(--tcb-foam);
+      border: 1px solid var(--tcb-line-light);
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 16px;
+      line-height: 1.3;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+    }
+    .tcb-cabin-lookup .tcb-search-row input,
+    .tcb-cabin-lookup .tcb-search-row button { max-width: 100%; }
+
+    .tcb-cabin-lookup .tcb-results { display: grid; gap: 14px; }
+    .tcb-cabin-lookup .tcb-cabin-card {
+      background: var(--tcb-navy-deep);
+      border: 1px solid var(--tcb-line-light);
+      border-radius: 16px;
+      padding: 18px;
+    }
+    .tcb-cabin-lookup .tcb-cabin-card h2 {
+      font-size: 28px;
+      color: var(--tcb-white);
+    }
+    .tcb-cabin-lookup .tcb-cat {
+      margin: 6px 0 10px;
+      font-family: var(--tcb-font-display);
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--tcb-white);
+    }
+    .tcb-cabin-lookup .tcb-family {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #fff4e8;
+      color: var(--tcb-navy);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      vertical-align: middle;
+    }
+    .tcb-cabin-lookup .tcb-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 12px 0;
+    }
+    .tcb-cabin-lookup .tcb-meta div {
+      background: rgba(255,255,255,0.04);
+      border-radius: 10px;
+      padding: 8px 10px;
+    }
+    .tcb-cabin-lookup .tcb-meta span {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--tcb-muted);
+      font-weight: 600;
+    }
+    .tcb-cabin-lookup .tcb-meta strong { color: var(--tcb-white); }
+    .tcb-cabin-lookup .tcb-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+    .tcb-cabin-lookup .tcb-chip {
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: 600;
+      background: #e5f3fc;
+      color: var(--tcb-navy);
+    }
+    .tcb-cabin-lookup .tcb-callout {
+      margin: 12px 0 0;
+      padding: 12px 14px;
+      border-left: 4px solid var(--tcb-orange);
+      background: rgba(243, 140, 43, 0.12);
+      border-radius: 0 10px 10px 0;
+      color: var(--tcb-foam);
+    }
+    .tcb-cabin-lookup .tcb-pending {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--tcb-line-light);
+    }
+    .tcb-cabin-lookup .tcb-pending h3 {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--tcb-muted);
+      margin-bottom: 8px;
+    }
+    .tcb-cabin-lookup .tcb-pending ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: var(--tcb-muted);
+      font-size: 14px;
+      columns: 2;
+    }
+    .tcb-cabin-lookup .tcb-pending li { padding: 2px 0; }
+    .tcb-cabin-lookup .tcb-pending li::before { content: "• "; color: var(--tcb-orange); }
+
+    .tcb-cabin-lookup .tcb-list { display: grid; gap: 8px; }
+    .tcb-cabin-lookup .tcb-list button {
+      text-align: left;
+      width: 100%;
+      max-width: 100%;
+      border: 1px solid var(--tcb-line-light);
+      background: var(--tcb-navy-deep);
+      color: var(--tcb-foam);
+      border-radius: 10px;
+      padding: 10px 12px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 14px;
+    }
+    .tcb-cabin-lookup .tcb-list button:hover,
+    .tcb-cabin-lookup .tcb-list button:focus-visible {
+      border-color: var(--tcb-blue);
+      outline: none;
+    }
+    .tcb-cabin-lookup .tcb-list strong { font-family: var(--tcb-font-display); color: var(--tcb-white); }
+    .tcb-cabin-lookup .tcb-empty, .tcb-cabin-lookup .tcb-status { color: var(--tcb-muted); }
+    .tcb-cabin-lookup .tcb-more {
+      margin-top: 8px;
+      background: transparent;
+      border: 1px solid var(--tcb-line-light);
+      color: var(--tcb-foam);
+      border-radius: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .tcb-cabin-lookup .tcb-cta {
+      display: block;
+      width: 100%;
+      text-align: center;
+      text-decoration: none !important;
+      background: var(--tcb-blue-btn) !important;
+      color: var(--tcb-white) !important;
+      font-family: var(--tcb-font-display);
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 1.3;
+      padding: 14px 18px;
+      border-radius: 999px;
+      margin: 18px 0 16px;
+      box-shadow: 0 8px 20px rgba(0, 116, 194, 0.28);
+    }
+    .tcb-cabin-lookup .tcb-cta:hover,
+    .tcb-cabin-lookup .tcb-cta:focus-visible {
+      background: #0068b5 !important;
+      color: var(--tcb-white) !important;
+      outline: none;
+    }
+
+    /* Recognition badges stay on a white card because the artwork has a white background */
+    .tcb-cabin-lookup .tcb-credibility {
+      background: var(--tcb-white);
+      border-radius: 16px;
+      padding: 16px 18px;
+      text-align: center;
+    }
+    .tcb-cabin-lookup .tcb-badge-horizontal,
+    .tcb-cabin-lookup .tcb-badge-square { display: block; margin: 0 auto; background: #fff; }
+    .tcb-cabin-lookup .tcb-badge-horizontal {
+      width: min(520px, 100%);
+      height: auto;
+    }
+    .tcb-cabin-lookup .tcb-badge-square { display: none; width: 160px; height: 160px; object-fit: contain; margin: 0 auto; }
+    .tcb-cabin-lookup .tcb-cred-caption {
+      margin: 8px 0 0;
+      color: var(--tcb-navy);
+      font-size: 13px;
+    }
+    .tcb-cabin-lookup .tcb-disclaimer {
+      margin: 16px 0 0;
+      font-size: 12px;
+      color: var(--tcb-muted);
+      line-height: 1.5;
+    }
+    .tcb-cabin-lookup .tcb-plan-source {
+      margin: 8px 0 0;
+      font-size: 11px;
+      color: var(--tcb-muted);
+      line-height: 1.45;
+    }
+    .tcb-cabin-lookup .tcb-locked-ship {
+      display: none;
+      margin: 0 0 16px;
+      font-family: "Poppins", sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--tcb-navy);
+    }
+    .tcb-cabin-lookup.is-locked .tcb-ships { display: none; }
+    .tcb-cabin-lookup.is-locked .tcb-locked-ship { display: block; }
+    .tcb-cabin-lookup .tcb-meta .tcb-ask { color: var(--tcb-muted); font-weight: 600; }
+
+    .tcb-cabin-lookup .tcb-filters .tcb-check {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--tcb-navy-deep);
+      color: var(--tcb-foam);
+      border: 1px solid var(--tcb-line-light);
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .tcb-cabin-lookup .tcb-filters .tcb-check input {
+      accent-color: var(--tcb-orange);
+      width: 16px;
+      height: 16px;
+    }
+    .tcb-cabin-lookup .tcb-card-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .tcb-cabin-lookup .tcb-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tcb-cabin-lookup .tcb-sailed-badge,
+    .tcb-cabin-lookup .tcb-preliminary {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-family: var(--tcb-font-display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1.3;
+    }
+    .tcb-cabin-lookup .tcb-sailed-badge,
+    .tcb-cabin-lookup .tcb-verified-badge {
+      background: var(--tcb-orange);
+      color: var(--tcb-navy);
+    }
+    .tcb-cabin-lookup .tcb-preliminary {
+      background: rgba(255,255,255,0.1);
+      color: var(--tcb-muted);
+      border: 1px solid var(--tcb-line-light);
+    }
+    .tcb-cabin-lookup .tcb-take {
+      margin-top: 14px;
+      padding: 14px 14px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--tcb-line-light);
+    }
+    .tcb-cabin-lookup .tcb-take h3 {
+      font-size: 16px;
+      color: var(--tcb-white);
+      margin-bottom: 8px;
+    }
+    .tcb-cabin-lookup .tcb-take p,
+    .tcb-cabin-lookup .tcb-take li { font-size: 14px; }
+    .tcb-cabin-lookup .tcb-take-good,
+    .tcb-cabin-lookup .tcb-take-bad {
+      margin: 0 0 8px;
+      padding: 0 0 0 18px;
+    }
+    .tcb-cabin-lookup .tcb-take-good { color: #8ee0b0; }
+    .tcb-cabin-lookup .tcb-take-bad { color: #ff9b9b; }
+    .tcb-cabin-lookup .tcb-take-comment,
+    .tcb-cabin-lookup .tcb-take-empty { margin: 0 0 8px; color: var(--tcb-foam); }
+    .tcb-cabin-lookup .tcb-take-empty { color: var(--tcb-muted); }
+    .tcb-cabin-lookup .tcb-score {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 10px 14px;
+      margin: 12px 0 4px;
+      padding: 12px 14px;
+      background: rgba(0, 137, 229, 0.14);
+      border: 1px solid rgba(0, 137, 229, 0.32);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 100%;
+    }
+    .tcb-cabin-lookup .tcb-score-num {
+      font-family: var(--tcb-font-display);
+      font-weight: 800;
+      font-size: 36px;
+      line-height: 1;
+      color: var(--tcb-white);
+      min-width: 2.2ch;
+    }
+    .tcb-cabin-lookup .tcb-score-copy { flex: 1 1 180px; min-width: 0; }
+    .tcb-cabin-lookup .tcb-score-name {
+      font-family: var(--tcb-font-display);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--tcb-foam);
+    }
+    .tcb-cabin-lookup .tcb-score-label {
+      font-weight: 700;
+      color: var(--tcb-orange);
+      margin: 2px 0 4px;
+    }
+    .tcb-cabin-lookup .tcb-score-why { margin: 0; color: var(--tcb-foam); font-size: 14px; }
+    .tcb-cabin-lookup .tcb-verified-how {
+      margin: 0 0 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--tcb-orange);
+    }
+    .tcb-cabin-lookup .tcb-list-score { font-weight: 700; color: var(--tcb-orange); }
+    .tcb-cabin-lookup .tcb-sailed-notes,
+    .tcb-cabin-lookup .tcb-verified-notes {
+      margin: 10px 0 0;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(243, 140, 43, 0.12);
+      border-left: 4px solid var(--tcb-orange);
+    }
+    .tcb-cabin-lookup .tcb-sailed-notes span,
+    .tcb-cabin-lookup .tcb-verified-notes span {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--tcb-orange);
+      margin-bottom: 4px;
+    }
+    .tcb-cabin-lookup .tcb-list button .tcb-list-meta {
+      color: var(--tcb-muted);
+      text-align: right;
+      min-width: 0;
+      flex: 1 1 140px;
+      overflow-wrap: anywhere;
+    }
+    .tcb-cabin-lookup .tcb-cabin-card,
+    .tcb-cabin-lookup .tcb-take,
+    .tcb-cabin-lookup .tcb-sailed-notes,
+    .tcb-cabin-lookup .tcb-lead,
+    .tcb-cabin-lookup .tcb-disclaimer { overflow-wrap: break-word; }
+    .tcb-cabin-lookup .tcb-list .tcb-sailed-dot,
+    .tcb-cabin-lookup .tcb-list .tcb-verified-dot { color: var(--tcb-orange); font-weight: 700; }
+
+    @media (max-width: 800px) {
+      body.tcb-cabin-page { padding: 12px 8px; }
+      .tcb-cabin-lookup .tcb-masthead,
+      .tcb-cabin-lookup .tcb-body { padding-left: 14px; padding-right: 14px; }
+      .tcb-cabin-lookup .tcb-logo-horizontal { display: none; }
+      .tcb-cabin-lookup .tcb-logo-square { display: block; }
+      .tcb-cabin-lookup .tcb-badge-horizontal { display: none; }
+      .tcb-cabin-lookup .tcb-badge-square { display: block; }
+      .tcb-cabin-lookup .tcb-ships { grid-template-columns: 1fr 1fr; }
+      .tcb-cabin-lookup .tcb-search-row { grid-template-columns: 1fr; }
+      .tcb-cabin-lookup .tcb-meta { grid-template-columns: 1fr 1fr; }
+      .tcb-cabin-lookup .tcb-meta div { min-width: 0; }
+      .tcb-cabin-lookup .tcb-pending ul { columns: 1; }
+      .tcb-cabin-lookup .tcb-filter,
+      .tcb-cabin-lookup .tcb-filters select,
+      .tcb-cabin-lookup .tcb-filters .tcb-check {
+        flex: 1 1 100%;
+        width: 100%;
+      }
+      .tcb-cabin-lookup .tcb-list button {
+        flex-direction: column;
+        gap: 4px;
+      }
+      .tcb-cabin-lookup .tcb-list button .tcb-list-meta { text-align: left; }
+      .tcb-cabin-lookup .tcb-cabin-card { padding: 14px; }
+      .tcb-cabin-lookup .tcb-cabin-card h2 { font-size: 24px; }
+      .tcb-cabin-lookup .tcb-score-num { font-size: 30px; }
+      .tcb-cabin-lookup .tcb-sailed-badge,
+      .tcb-cabin-lookup .tcb-verified-badge,
+      .tcb-cabin-lookup .tcb-preliminary {
+        font-size: 10px;
+        padding: 4px 8px;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+      }
+    }
+
+
+/* ---------- Interactive deck plans (scoped) ---------- */
+.tcb-cabin-lookup.tcb-deckmap { max-width: 1240px; overflow: visible; }
+.tcb-deckmap .tcb-masthead { border-radius: 20px 20px 0 0; position: relative; }
+.tcb-deckmap .dm-preview {
+  position: absolute; top: 18px; right: 20px;
+  background: var(--tcb-orange); color: #1b2833; font-family: var(--tcb-font-display);
+  font-weight: 700; font-size: 12px; letter-spacing: .08em; padding: 5px 10px; border-radius: 999px;
+}
+.tcb-deckmap .dm-controls { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-bottom: 16px; }
+.tcb-deckmap .dm-controls > div, .tcb-deckmap .dm-filterline > div, .tcb-deckmap .dm-main > * { min-width: 0; }
+.tcb-deckmap .dm-row-label {
+  font-family: var(--tcb-font-display); font-weight: 600; font-size: 12px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--tcb-muted); margin: 0 0 6px;
+}
+.tcb-deckmap .dm-decks { display: flex; flex-wrap: wrap; gap: 6px; }
+.tcb-deckmap .dm-decks button, .tcb-deckmap .dm-fams button {
+  appearance: none; border: 1px solid var(--tcb-line-light); background: var(--tcb-navy-deep);
+  color: var(--tcb-foam); border-radius: 10px; font-weight: 600; font-size: 14px; cursor: pointer;
+  min-width: 44px; min-height: 40px; padding: 6px 10px; position: relative; font-family: var(--tcb-font-body);
+}
+.tcb-deckmap .dm-decks button.is-active, .tcb-deckmap .dm-fams button.is-active {
+  background: var(--tcb-blue-btn); border-color: var(--tcb-blue); color: #fff;
+}
+.tcb-deckmap .dm-decks button.no-cabins { color: #9fb0bd; }
+.tcb-deckmap .dm-decks button .dm-badge {
+  position: absolute; top: -7px; right: -6px; background: var(--tcb-orange); color: #1b2833;
+  font-size: 10px; font-weight: 700; border-radius: 999px; padding: 1px 5px; line-height: 1.4;
+}
+.tcb-deckmap .dm-decks button:focus-visible, .tcb-deckmap .dm-fams button:focus-visible,
+.tcb-deckmap .dm-tool:focus-visible { outline: 3px solid var(--tcb-orange); outline-offset: 2px; }
+.tcb-deckmap .dm-findrow { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+.tcb-deckmap .dm-findrow input {
+  width: 100%; min-height: 44px; border-radius: 12px; border: 1px solid var(--tcb-line-light);
+  background: #fff; color: var(--tcb-navy); font-size: 16px; padding: 10px 14px;
+}
+.tcb-deckmap .dm-findrow button {
+  min-height: 44px; border-radius: 12px; border: 0; background: var(--tcb-blue-btn); color: #fff;
+  font-weight: 700; font-family: var(--tcb-font-display); padding: 0 18px; cursor: pointer; font-size: 15px;
+}
+.tcb-deckmap .dm-findmsg { margin: 6px 0 0; font-size: 14px; color: var(--tcb-muted); min-height: 1.2em; }
+.tcb-deckmap .dm-findmsg button {
+  background: none; border: 1px solid var(--tcb-line-light); color: #fff; border-radius: 8px;
+  padding: 2px 8px; margin: 0 4px; cursor: pointer; font-weight: 600;
+}
+.tcb-deckmap .dm-filterline { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 260px); gap: 10px; align-items: end; }
+.tcb-deckmap .dm-fams { display: flex; flex-wrap: wrap; gap: 6px; }
+.tcb-deckmap .dm-fams button .dm-sw { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: 0; }
+.tcb-deckmap select#dm-cat {
+  width: 100%; min-height: 40px; border-radius: 10px; border: 1px solid var(--tcb-line-light);
+  background: var(--tcb-navy-deep); color: var(--tcb-foam); padding: 6px 10px; font-size: 14px;
+}
+.tcb-deckmap .dm-main { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 16px; align-items: start; }
+.tcb-deckmap .dm-viewer {
+  position: relative; background: #fff; border-radius: 16px; overflow: hidden;
+  border: 1px solid var(--tcb-line-light);
+}
+.tcb-deckmap .dm-viewport {
+  position: relative; overflow: auto; height: clamp(520px, calc(100vh - 140px), 900px);
+  touch-action: pan-x pan-y; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; background: #fff;
+}
+.tcb-deckmap .dm-stage { position: relative; margin: 0 auto; }
+.tcb-deckmap .dm-stage img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; user-select: none; -webkit-user-drag: none; }
+.tcb-deckmap .dm-spots { position: absolute; inset: 0; }
+.tcb-deckmap .dm-spot {
+  position: absolute; padding: 0; margin: 0; border: 0; background: transparent; cursor: pointer;
+  border-radius: 2px; -webkit-tap-highlight-color: transparent;
+}
+.tcb-deckmap .dm-spot:hover { outline: 2px solid var(--tcb-blue); outline-offset: -1px; background: rgba(0,137,229,.12); }
+.tcb-deckmap .dm-spot:focus-visible { outline: 3px solid var(--tcb-orange); outline-offset: 0; }
+.tcb-deckmap .is-filtering .dm-spot { background: rgba(255,255,255,.72); }
+.tcb-deckmap .is-filtering .dm-spot.is-match { background: rgba(243,140,43,.28); outline: 2px solid var(--tcb-orange); outline-offset: -1px; }
+.tcb-deckmap .dm-spot.is-selected, .tcb-deckmap .is-filtering .dm-spot.is-selected {
+  background: rgba(0,137,229,.22); outline: 3px solid var(--tcb-blue); outline-offset: 0; z-index: 2;
+  animation: dmPulse 1.4s ease-out 2;
+}
+@keyframes dmPulse { 0% { box-shadow: 0 0 0 0 rgba(0,137,229,.7); } 100% { box-shadow: 0 0 0 14px rgba(0,137,229,0); } }
+.tcb-deckmap .dm-deckzone { position: absolute; border: 0; background: transparent; cursor: pointer; border-radius: 10px; }
+.tcb-deckmap .dm-deckzone:hover, .tcb-deckmap .dm-deckzone:focus-visible { background: rgba(0,137,229,.12); outline: 2px solid var(--tcb-blue); }
+.tcb-deckmap .dm-tools {
+  position: absolute; top: 10px; right: 10px; z-index: 5; display: flex; flex-direction: column; gap: 6px;
+}
+.tcb-deckmap .dm-tool {
+  width: 44px; height: 44px; border-radius: 12px; border: 1px solid rgba(44,63,81,.2); background: #fff;
+  color: var(--tcb-navy); font-size: 22px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  font-family: var(--tcb-font-display); line-height: 1;
+}
+.tcb-deckmap .dm-tool.dm-txt { font-size: 10px; font-weight: 700; letter-spacing: .02em; line-height: 1.1; }
+.tcb-deckmap .dm-status {
+  position: absolute; left: 10px; bottom: 10px; z-index: 5; background: rgba(27,40,51,.88); color: #fff;
+  font-size: 12px; padding: 5px 10px; border-radius: 999px; pointer-events: none; max-width: calc(100% - 20px);
+}
+.tcb-deckmap .dm-loading {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 4;
+  color: var(--tcb-navy); font-weight: 600; background: rgba(255,255,255,.85);
+}
+.tcb-deckmap .dm-loading[hidden] { display: none; }
+.tcb-deckmap .dm-panel { position: sticky; top: 12px; display: grid; gap: 12px; }
+.tcb-deckmap .dm-panel .dm-empty {
+  background: var(--tcb-navy-deep); border: 1px dashed var(--tcb-line-light); border-radius: 16px; padding: 18px; color: var(--tcb-muted);
+}
+.tcb-deckmap .dm-panel .dm-empty h2 { color: #fff; font-size: 20px; margin-bottom: 6px; }
+.tcb-deckmap .dm-panel .dm-empty p { margin: 0 0 8px; }
+.tcb-deckmap .dm-sheet-close { display: none; }
+.tcb-deckmap .dm-card-actions { display: grid; gap: 8px; margin-top: 14px; }
+.tcb-deckmap .dm-btn {
+  display: block; text-align: center; text-decoration: none !important; border-radius: 999px; padding: 12px 16px;
+  font-family: var(--tcb-font-display); font-weight: 700; font-size: 16px; line-height: 1.25;
+}
+.tcb-deckmap .dm-btn-primary { background: var(--tcb-orange); color: #1b2833 !important; }
+.tcb-deckmap .dm-btn-primary:hover { background: #ff9d40; }
+.tcb-deckmap .dm-btn-ghost { border: 1px solid var(--tcb-line-light); color: #fff !important; }
+.tcb-deckmap .dm-btn-ghost:hover { border-color: #fff; }
+.tcb-deckmap .dm-cl-link { margin: 12px 0 0; text-align: center; font-size: 14px; }
+.tcb-deckmap .dm-cl-link a { color: #b8ddff; text-decoration: underline; }
+.tcb-deckmap .dm-legend { font-size: 13px; color: var(--tcb-muted); margin: 0; }
+.tcb-deckmap .dm-legend span { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin: 0 4px 0 10px; }
+.tcb-deckmap .dm-legend span:first-child { margin-left: 0; }
+.tcb-deckmap .dm-contact {
+  margin-top: 22px; background: var(--tcb-navy-deep); border: 1px solid var(--tcb-line-light); border-radius: 16px;
+  padding: 20px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: center;
+}
+.tcb-deckmap .dm-contact h2 { color: #fff; font-size: 22px; margin-bottom: 4px; }
+.tcb-deckmap .dm-contact p { margin: 0; color: var(--tcb-muted); }
+.tcb-deckmap .dm-contact-links { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.tcb-deckmap .dm-credit { font-size: 13px; color: var(--tcb-muted); margin: 18px 0 0; }
+.tcb-deckmap .dm-credit strong { color: #fff; }
+.tcb-deckmap .dm-deckhead { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin: 0 0 8px; flex-wrap: wrap; }
+.tcb-deckmap .dm-deckhead h2 { color: #fff; font-size: 22px; }
+.tcb-deckmap .dm-deckhead p { margin: 0; color: var(--tcb-muted); font-size: 14px; }
+.tcb-deckmap .tcb-ships { margin-bottom: 0; }
+
+@media (max-width: 960px) {
+  .tcb-deckmap .dm-main { grid-template-columns: minmax(0, 1fr); }
+  .tcb-deckmap .dm-panel { position: static; }
+  .tcb-deckmap .dm-viewport { height: min(70vh, 640px); }
+  .tcb-deckmap .dm-tools {
+    position: static; flex-direction: row; justify-content: flex-end; padding: 6px; gap: 6px;
+    background: #f4f7fa; border-bottom: 1px solid rgba(44,63,81,.12);
+  }
+  .tcb-deckmap .dm-tool { width: 52px; height: 38px; box-shadow: none; }
+  .tcb-deckmap .dm-tool.dm-txt br { display: none; }
+  .tcb-deckmap .dm-tool.dm-txt { width: auto; padding: 0 10px; font-size: 11px; }
+  .tcb-deckmap .dm-panel .dm-cardwrap.is-open {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 9999; max-height: 52vh; overflow: auto;
+    background: var(--tcb-navy); border-radius: 18px 18px 0 0; padding: 12px 12px 18px;
+    box-shadow: 0 -12px 40px rgba(0,0,0,.45); -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+  }
+  .tcb-deckmap .dm-cardwrap.is-open .dm-sheet-close {
+    display: block; margin: 0 0 10px auto; min-height: 40px; padding: 0 14px; border-radius: 999px;
+    border: 1px solid var(--tcb-line-light); background: var(--tcb-navy-deep); color: #fff; font-weight: 600; cursor: pointer;
+  }
+  .tcb-deckmap .dm-contact { grid-template-columns: minmax(0, 1fr); }
+  .tcb-deckmap .dm-contact-links { justify-content: stretch; flex-direction: column; }
+  .tcb-deckmap .dm-filterline { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 800px) {
+  body.tcb-deck-page { padding: 12px 8px; }
+  .tcb-deckmap .dm-preview { top: 12px; right: 12px; }
+  .tcb-deckmap .tcb-ships { grid-template-columns: 1fr 1fr; }
+  .tcb-deckmap .dm-decks button { min-width: 42px; padding: 6px 8px; flex: 0 0 auto; }
+  .tcb-deckmap .dm-decks, .tcb-deckmap .dm-fams {
+    flex-wrap: nowrap; overflow-x: auto; padding: 8px 2px 6px; margin: -8px -2px 0; scrollbar-width: thin; -webkit-overflow-scrolling: touch;
+  }
+  .tcb-deckmap .dm-fams button { flex: 0 0 auto; white-space: nowrap; }
+  .tcb-deckmap .tcb-ships button { padding: 8px 6px; }
+  .tcb-deckmap .dm-controls { gap: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .tcb-deckmap .dm-spot.is-selected { animation: none; } }
+</style>
+
+<div class="tcb-cabin-lookup tcb-deckmap" id="tcb-deckmap">
+  <header class="tcb-masthead">
+    <img class="tcb-logo-horizontal" src="assets/tcb-logo-horizontal.png" width="800" height="304" alt="The Cruise Boys® - powered by KVI Travel" />
+    <img class="tcb-logo-square" src="assets/tcb-logo-square.png" width="240" height="240" alt="The Cruise Boys® - powered by KVI Travel" />
+    <p class="tcb-brand-line">The Cruise Boys® - powered by KVI Travel</p>
+    <h1>Virgin Voyages Interactive Deck Plans</h1>
+    <p class="tcb-lead">Pick a ship and a deck to see Virgin's official deck plan. Tap any cabin to see its category, side, bed position and The Cruise Boys® Score, highlight a cabin type across the deck, or jump straight to a cabin number.</p>
+  </header>
+
+  <div class="tcb-body">
+    <div class="dm-controls">
+      <div>
+        <p class="dm-row-label" id="dm-ship-label">Ship</p>
+        <div class="tcb-ships" role="group" aria-labelledby="dm-ship-label" id="dm-ships"></div>
+      </div>
+      <div>
+        <p class="dm-row-label" id="dm-deck-label">Deck</p>
+        <div class="dm-decks" role="group" aria-labelledby="dm-deck-label" id="dm-decks"></div>
+      </div>
+      <div>
+        <label class="dm-row-label" for="dm-find" style="display:block">Find a cabin</label>
+        <form class="dm-findrow" id="dm-findform" autocomplete="off">
+          <input id="dm-find" type="text" inputmode="text" placeholder="e.g. 9254A or 9254" aria-describedby="dm-findmsg" />
+          <button type="submit">Find</button>
+        </form>
+        <p class="dm-findmsg" id="dm-findmsg" aria-live="polite"></p>
+      </div>
+      <div class="dm-filterline">
+        <div>
+          <p class="dm-row-label" id="dm-fam-label">Highlight a cabin type</p>
+          <div class="dm-fams" role="group" aria-labelledby="dm-fam-label" id="dm-fams"></div>
+        </div>
+        <div>
+          <label class="dm-row-label" for="dm-cat" style="display:block">Or a specific category</label>
+          <select id="dm-cat"><option value="">All categories</option></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="dm-main">
+      <div>
+        <div class="dm-deckhead"><h2 id="dm-deck-title">Deck</h2><p id="dm-deck-sub"></p></div>
+        <div class="dm-viewer">
+          <div class="dm-tools" role="group" aria-label="Zoom">
+            <button type="button" class="dm-tool" id="dm-zoom-in" aria-label="Zoom in">+</button>
+            <button type="button" class="dm-tool" id="dm-zoom-out" aria-label="Zoom out">&minus;</button>
+            <button type="button" class="dm-tool dm-txt" id="dm-fit" aria-label="Fit the ship to the screen">FIT<br> SHIP</button>
+            <button type="button" class="dm-tool dm-txt" id="dm-page" aria-label="Show the whole page">WHOLE<br> PAGE</button>
+          </div>
+          <div class="dm-viewport" id="dm-viewport" tabindex="0" aria-label="Deck plan. Scroll or drag to pan, pinch or use the zoom buttons to zoom.">
+            <div class="dm-stage" id="dm-stage">
+              <img id="dm-img" alt="" decoding="async" />
+              <div class="dm-spots" id="dm-spots"></div>
+            </div>
+          </div>
+          <div class="dm-loading" id="dm-loading">Loading deck plan...</div>
+          <div class="dm-status" id="dm-status"></div>
+        </div>
+        <p class="dm-legend" style="margin-top:8px"><span style="background:rgba(243,140,43,.5);outline:2px solid #F38C2B"></span>Matches your highlight <span style="outline:3px solid #0089E5;background:rgba(0,137,229,.22)"></span>Selected cabin</p>
+      </div>
+      <aside class="dm-panel" aria-live="polite">
+        <div class="dm-cardwrap" id="dm-cardwrap">
+          <button type="button" class="dm-sheet-close" id="dm-sheet-close">Close</button>
+          <div id="dm-card">
+            <div class="dm-empty">
+              <h2>Tap a cabin</h2>
+              <p>Tap or click any cabin number on the deck plan to see its details here.</p>
+              <p>Zoom in with + or a pinch, and drag to move around the ship.</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <section class="dm-contact" aria-label="Plan your voyage">
+      <div>
+        <h2>Found the cabin you want?</h2>
+        <p>Send us your ship, dates and cabin number and The Cruise Boys® will price it for you, including any perks when you book through us.</p>
+      </div>
+      <div class="dm-contact-links">
+        <a class="dm-btn dm-btn-primary" href="https://book.thecruiseboys.com/form/jfarfkpn2q70" target="_blank" rel="noopener">Price this cruise</a>
+        <a class="dm-btn dm-btn-ghost" href="mailto:Info@TheCruiseBoys.com">Info@TheCruiseBoys.com</a>
+        <a class="dm-btn dm-btn-ghost" href="sms:+13213005580">Text 321-300-5580</a>
+      </div>
+    </section>
+
+    <p class="dm-credit"><strong>Deck plans courtesy of Virgin Voyages.</strong> Deck plans, venues and cabin categories can change, especially after a dry dock or refresh, so always confirm your cabin with The Cruise Boys® before you book. Cabin details, bed positions and The Cruise Boys® Score come from our Cabin Lookup data. Virgin's marketing deck plans do not show furniture.</p>
+    <p class="dm-credit" id="dm-source"></p>
+  </div>
+</div>
+<script>
+(function () {
+  var BASE = (document.currentScript && document.currentScript.getAttribute("data-base")) || "";
+  var SHIP_ORDER = ["scarlet-lady", "valiant-lady", "resilient-lady", "brilliant-lady"];
+  var SHIP_INFO = {
+    "scarlet-lady":   { name: "Scarlet Lady",   file: "scarlet",   source: "Scarlet Lady deck plan, updated 01/25/2026" },
+    "valiant-lady":   { name: "Valiant Lady",   file: "valiant",   source: "Valiant Lady deck plan, single pager dated 05/12/2026" },
+    "resilient-lady": { name: "Resilient Lady", file: "resilient", source: "Resilient Lady deck plan, updated 01/25/2026" },
+    "brilliant-lady": { name: "Brilliant Lady", file: "brilliant", source: "Brilliant Lady deck plan, updated 01/25/2026" }
+  };
+  var FAMILIES = [
+    { id: "", label: "No highlight" },
+    { id: "Insider", label: "Insider", sw: "#F05A28" },
+    { id: "Sea View", label: "Sea View", sw: "#0E6E6E" },
+    { id: "Sea Terrace", label: "Sea Terrace", sw: "#22B573" },
+    { id: "RockStar", label: "RockStar", sw: "#B39B5B" },
+    { id: "Mega RockStar", label: "Mega RockStar", sw: "#E8336D" }
+  ];
+  var DECK_NOTES = { 4: "Tender and boarding deck", 6: "Restaurants, bars and shops", 7: "Restaurants, bars and The Red Room", 16: "Pools, sports and Richard's Rooftop", 17: "The Perch and The Runway" };
+  var SHIPS = window.TCB_SHIP_DATA = window.TCB_SHIP_DATA || {};
+  var MAPS = window.TCB_DECKMAP = window.TCB_DECKMAP || {};
+
+  /* ---- Cabin Lookup helpers (copied from cabin-lookup.html at build time) ---- */
+  var state = { ship: "scarlet-lady" };
+  var SIDE = { P: "Port", S: "Starboard", M: "Midship" };
+  var BED_LABEL = { W: "By the window/balcony", B: "By the bathroom" };
+  var NOTE_BITS = {
+    metal_balcony: 1,
+    no_hammock: 2,
+    larger_balcony: 4,
+    extra_space: 8,
+    near_elevators: 16,
+    near_pools: 32,
+    near_noisy_venue: 64,
+    near_noisy_operations: 128,
+    busy_corridor: 256,
+    smaller_than_usual: 512,
+    terrace_hammock: 1024,
+    glass_balcony: 2048,
+    far_elevators: 4096
+  };
+  var TAKE_GOOD = [
+    [NOTE_BITS.larger_balcony, "Extra-large balcony"],
+    [NOTE_BITS.extra_space, "More interior space than usual"],
+    [NOTE_BITS.terrace_hammock, "Terrace hammock"],
+    [NOTE_BITS.glass_balcony, "Glass balcony"]
+  ];
+  var TAKE_BAD = [
+    [NOTE_BITS.metal_balcony, "Metal balcony rail"],
+    [NOTE_BITS.no_hammock, "No terrace hammock"],
+    [NOTE_BITS.near_elevators, "Close to the elevators"],
+    [NOTE_BITS.far_elevators, "Longer walk to the elevators"],
+    [NOTE_BITS.near_pools, "Under the pool deck"],
+    [NOTE_BITS.near_noisy_venue, "Near a noisy venue"],
+    [NOTE_BITS.near_noisy_operations, "Near ship operations"],
+    [NOTE_BITS.busy_corridor, "Busier hallway"],
+    [NOTE_BITS.smaller_than_usual, "Smaller than usual"]
+  ];
+  var TCB_SCORE_CONFIG = {
+    weights: { location: 0.30, adjacency: 0.25, view: 0.15, features: 0.10, take: 0.20 },
+    locationSplit: { longitudinal: 0.60, deck: 0.40 },
+    longBands: [
+      [0, 12, 3.0, "FF", "far forward"],
+      [12, 28, 5.0, "F", "forward"],
+      [28, 35, 8.0, "MF", "mid-forward"],
+      [35, 70, 10.0, "M", "midship"],
+      [70, 80, 8.0, "MA", "mid-aft"],
+      [80, 90, 6.5, "A", "aft"],
+      [90, 101, 5.5, "FA", "far aft"]
+    ],
+    deckMotion: { 5: 10, 8: 8.4, 9: 7.8, 10: 7.2, 11: 6.6, 12: 6.0, 13: 5.4, 14: 4.8, 15: 4.0 },
+    suiteFamilies: { RockStar: 1, "Mega RockStar": 1 },
+    suiteCodes: { SS: 1, SB: 1, SAP: 1, SAE: 1, SAB: 1, SCP: 1, SCE: 1, SCB: 1, SM: 1, SF: 1, SG: 1, SP: 1 },
+    suiteLongBands: [
+      [0, 12, 7.0, "FF", "far forward"],
+      [12, 28, 7.8, "F", "forward"],
+      [28, 35, 8.8, "MF", "mid-forward"],
+      [35, 70, 10.0, "M", "midship"],
+      [70, 80, 8.8, "MA", "mid-aft"],
+      [80, 90, 8.2, "A", "aft"],
+      [90, 101, 7.8, "FA", "far aft"]
+    ],
+    suiteDeckMotion: { 5: 10, 8: 9.7, 9: 9.5, 10: 9.3, 11: 9.1, 12: 8.9, 13: 8.7, 14: 8.5, 15: 8.2 },
+    suiteVenueScale: 0.5,
+    suiteVenueKeys: { under_pool: 1, under_galley: 1, over_theater: 1, under_theater: 1, over_bar: 1, under_bar: 1 },
+    viewSuiteBase: 8.5,
+    suitePerks: { SM: 0.6, SF: 0.5, SG: 0.4, SP: 0.4, SAB: 0.35, SCB: 0.35, SAE: 0.3, SCE: 0.3, SAP: 0.25, SCP: 0.25, SB: 0.25, SS: 0.2 },
+    suitePerkFallback: { "Mega RockStar": 0.4, RockStar: 0.2 },
+    adjStart: 10,
+    adjFloor: 1.5,
+    penalties: {
+      under_pool: 3.0, under_galley: 2.5, over_theater: 2.5, under_theater: 2.5,
+      over_bar: 2.0, under_bar: 2.0, near_elevator: 1.5, near_laundry: 1.5,
+      near_crew: 1.0, near_noisy_operations: 1.5, busy_corridor: 1.0
+    },
+    viewBase: 7.5,
+    viewLimited: 3.5,
+    viewExtended: 2.5,
+    viewCorner: 2.5,
+    viewLarger: 1.5,
+    features: 10,
+    takeNeutral: 5,
+    limitedCodes: { TL: 1 },
+    extendedCodes: { TX: 1, SAP: 1, SAE: 1, SAB: 1, SM: 1, SF: 1, SP: 1, SG: 1 },
+    cornerCodes: { SCP: 1, SCE: 1, SCB: 1 }
+  };
+
+  function shipData() { return SHIPS[state.ship]; }
+  function shipName(id) { return (SHIPS[id] && SHIPS[id].name) || id; }
+  function catMeta(code) {
+    var cats = (shipData() && shipData().categories) || {};
+    return cats[code] || { name: code || "Unknown", family: "", sleeps: 2 };
+  }
+  function flagList(bits) {
+    var out = [];
+    if (bits & 1) out.push("Accessible (marked on the official deck plan)");
+    if (bits & 2) out.push("Ambulatory (marked on the official deck plan)");
+    if (bits & 4) out.push("Connecting cabin (marked on the official deck plan)");
+    return out;
+  }
+  function normalize(q) {
+    return String(q || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+  }
+  function bedCode(c) {
+    return c.bp === "W" || c.bp === "B" ? c.bp : "";
+  }
+  function bedLabel(c) {
+    return BED_LABEL[bedCode(c)] || "";
+  }
+  function isVerified(c) {
+    return !!(c && (c.vb === 1 || c.vb === true || c.vb === "1" || c.vb === "yes" || c.sb === 1 || c.sb === true || c.sb === "1" || c.sb === "yes"));
+  }
+  function isSailed(c) { return isVerified(c); }
+  function verifiedHow(c) {
+    var h = c && (c.vh || c.how || "");
+    if (h === "s" || h === "sailed") return "Sailed in";
+    if (h === "t" || h === "toured") return "Toured";
+    return "";
+  }
+  function isSuite(code, family) {
+    var cfg = TCB_SCORE_CONFIG;
+    return !!(cfg.suiteFamilies[family] || cfg.suiteCodes[code]);
+  }
+  function suitePerk(code, family) {
+    var cfg = TCB_SCORE_CONFIG;
+    if (!isSuite(code, family)) return 0;
+    if (cfg.suitePerks[code] != null) return cfg.suitePerks[code];
+    if (cfg.suitePerkFallback[family] != null) return cfg.suitePerkFallback[family];
+    return 0.2;
+  }
+  function longBand(lp, suite) {
+    var x = lp == null || lp === "" ? null : Number(lp);
+    if (x == null || isNaN(x)) return [suite ? 8.8 : 6.5, "", ""];
+    if (x < 0) x = 0;
+    if (x > 100) x = 100;
+    var bands = suite ? TCB_SCORE_CONFIG.suiteLongBands : TCB_SCORE_CONFIG.longBands;
+    for (var i = 0; i < bands.length; i++) {
+      if (x >= bands[i][0] && x < bands[i][1]) return [bands[i][2], bands[i][3], bands[i][4]];
+    }
+    var last = bands[bands.length - 1];
+    return [last[2], last[3], last[4]];
+  }
+  function deckMotion(deck, suite) {
+    var m = suite ? TCB_SCORE_CONFIG.suiteDeckMotion : TCB_SCORE_CONFIG.deckMotion;
+    if (m[deck] != null) return m[deck];
+    return suite ? 8.9 : 6;
+  }
+  function locationScore(c, suite) {
+    var split = TCB_SCORE_CONFIG.locationSplit;
+    var band = longBand(c.lp, suite);
+    var loc = split.longitudinal * band[0] + split.deck * deckMotion(c.d, suite);
+    return { score: loc, code: band[1], label: band[2] };
+  }
+  function venueFlags(c) {
+    var flags = { under_pool: false, under_galley: false, over_theater: false, under_theater: false, over_bar: false, under_bar: false };
+    var av = c.av || [];
+    for (var i = 0; i < av.length; i++) {
+      var parts = String(av[i]).split(":");
+      var rel = parts[0], kind = parts[1];
+      if (rel === "u" && kind === "p") flags.under_pool = true;
+      if (rel === "u" && kind === "g") flags.under_galley = true;
+      if (rel === "o" && kind === "t") flags.over_theater = true;
+      if (rel === "u" && kind === "t") flags.under_theater = true;
+      if (rel === "o" && kind === "b") flags.over_bar = true;
+      if (rel === "u" && kind === "b") flags.under_bar = true;
+    }
+    var bits = c.sf || 0;
+    if (bits & NOTE_BITS.near_pools) flags.under_pool = true;
+    return flags;
+  }
+  function adjacencyScore(c) {
+    var cfg = TCB_SCORE_CONFIG;
+    var flags = venueFlags(c);
+    var bits = c.sf || 0;
+    if (bits & NOTE_BITS.near_elevators) flags.near_elevator = true;
+    if (bits & NOTE_BITS.near_noisy_operations) flags.near_noisy_operations = true;
+    if (bits & NOTE_BITS.busy_corridor) flags.busy_corridor = true;
+    var score = cfg.adjStart;
+    var applied = [];
+    var family = catMeta(c.c).family;
+    var suite = isSuite(c.c, family);
+    Object.keys(cfg.penalties).forEach(function (key) {
+      if (flags[key]) {
+        var pts = cfg.penalties[key];
+        if (suite && cfg.suiteVenueKeys[key]) pts = pts * cfg.suiteVenueScale;
+        score -= pts;
+        applied.push(key);
+      }
+    });
+    if (score < cfg.adjFloor) score = cfg.adjFloor;
+    return { score: score, applied: applied, flags: flags, venues: c.av || [] };
+  }
+  function viewScore(c) {
+    var cfg = TCB_SCORE_CONFIG;
+    var cat = c.c || "";
+    if (cfg.limitedCodes[cat]) return { score: cfg.viewLimited, kind: "limited" };
+    var family = catMeta(c.c).family;
+    var score = isSuite(cat, family) ? cfg.viewSuiteBase : cfg.viewBase, kind = "standard";
+    if (cfg.cornerCodes[cat]) { score += cfg.viewCorner; kind = "corner"; }
+    else if (cfg.extendedCodes[cat]) { score += cfg.viewExtended; kind = "extended"; }
+    else if ((c.sf || 0) & NOTE_BITS.larger_balcony) { score += cfg.viewLarger; kind = "larger"; }
+    if (score > 10) score = 10;
+    return { score: score, kind: kind };
+  }
+  function scoreLabel(total) {
+    if (total >= 9) return "Excellent";
+    if (total >= 8) return "Great";
+    if (total >= 6.5) return "Good";
+    return "Fair";
+  }
+  function isPreliminary(c) {
+    if (isVerified(c)) return false;
+    if (c.sa != null && c.sa !== "" && !isNaN(Number(c.sa))) return false;
+    if (c.nt) return false;
+    return true;
+  }
+  function cabinScore(c) {
+    var cfg = TCB_SCORE_CONFIG;
+    var family = catMeta(c.c).family;
+    var suite = isSuite(c.c, family);
+    var loc = locationScore(c, suite);
+    var adj = adjacencyScore(c);
+    var view = viewScore(c);
+    var adjust = Number(c.sa);
+    if (isNaN(adjust)) adjust = 0;
+    if (adjust > 2) adjust = 2;
+    if (adjust < -2) adjust = -2;
+    var total = loc.score * cfg.weights.location
+      + adj.score * cfg.weights.adjacency
+      + view.score * cfg.weights.view
+      + cfg.features * cfg.weights.features
+      + cfg.takeNeutral * cfg.weights.take
+      + adjust
+      + suitePerk(c.c, family);
+    total = Math.round(Math.max(1, Math.min(10, total)) * 10) / 10;
+    var whyBits = [];
+    var applied = adj.applied || [];
+    var venues = adj.venues || [];
+    function venueName(kind, fallback) {
+      for (var i = 0; i < venues.length; i++) {
+        var p = String(venues[i]).split(":");
+        if (p[1] === kind && p[2]) return p[2];
+      }
+      return fallback;
+    }
+    if (applied.indexOf("under_pool") >= 0) whyBits.push("under the pool deck");
+    if (applied.indexOf("under_galley") >= 0) whyBits.push("under The Galley");
+    if (applied.indexOf("over_theater") >= 0 || applied.indexOf("under_theater") >= 0) whyBits.push("next to The Red Room");
+    if (applied.indexOf("over_bar") >= 0) whyBits.push("above " + venueName("b", "a bar"));
+    else if (applied.indexOf("under_bar") >= 0) whyBits.push("under " + venueName("b", "a bar"));
+    if (applied.indexOf("near_elevator") >= 0) whyBits.push("close to the elevators");
+    if (view.kind === "limited") whyBits.push("limited view");
+    if ((view.kind === "corner" || view.kind === "extended") && whyBits.length < 2) {
+      whyBits.push(view.kind === "corner" ? "corner terrace" : "extra-large terrace");
+    }
+    if (loc.label === "midship" && whyBits.length < 2) whyBits.push("midship");
+    else if (loc.label && whyBits.length < 2) whyBits.push(loc.label);
+    if ((c.d === 5 || c.d === 8) && whyBits.length < 2) whyBits.push("on Deck " + c.d);
+    else if ((c.d === 14 || c.d === 15) && whyBits.length < 2) whyBits.push("on a higher deck (Deck " + c.d + ")");
+    if (!whyBits.length) whyBits.push("Deck " + c.d);
+    var why = whyBits[0].charAt(0).toUpperCase() + whyBits[0].slice(1);
+    if (whyBits.length > 1) why += ", " + whyBits[1];
+    if (why.slice(-1) !== ".") why += ".";
+    return {
+      total: total,
+      label: scoreLabel(total),
+      why: why,
+      loc: loc,
+      adj: adj,
+      view: view,
+      preliminary: isPreliminary(c)
+    };
+  }
+  function derivedTake(c) {
+    var goods = [];
+    var bads = [];
+    var loc = locationScore(c);
+    var view = viewScore(c);
+    var flags = venueFlags(c);
+    if (view.kind === "corner") goods.push("Corner terrace");
+    else if (view.kind === "extended" && (loc.code === "A" || loc.code === "FA")) goods.push("Extra-large aft terrace");
+    if (loc.label === "midship") goods.push("Midship location");
+    if (c.d === 5 || c.d === 8) goods.push("Lower deck, usually a smoother ride");
+    if (loc.label === "midship" && !((c.sf || 0) & NOTE_BITS.near_elevators) && !((c.sf || 0) & NOTE_BITS.near_noisy_venue) && !((c.sf || 0) & NOTE_BITS.near_pools)) {
+      goods.push("Quieter midship stretch");
+    }
+    if (view.kind === "limited") bads.push("Limited or partial view");
+    (c.av || []).forEach(function (item) {
+      var p = String(item).split(":");
+      var rel = p[0], kind = p[1], name = p[2] || "";
+      if (kind === "g" && rel === "u") bads.push("Under The Galley");
+      else if (kind === "t" && rel === "o") bads.push("Above The Red Room");
+      else if (kind === "t" && rel === "u") bads.push("Under The Red Room");
+      else if (kind === "b" && name) bads.push((rel === "u" ? "Under " : "Above ") + name);
+    });
+    if (c.f & 4) bads.push("Connecting door");
+    if (loc.code === "FF" || loc.code === "F") bads.push("Farther forward, so you may feel more motion");
+    if (c.d === 14 || c.d === 15) bads.push("Higher deck, so you may feel more motion");
+    return { goods: goods, bads: bads };
+  }
+  function takeItems(bits, pairs) {
+    var out = [];
+    (pairs || []).forEach(function (pair) {
+      if (bits & pair[0]) out.push(pair[1]);
+    });
+    return out;
+  }
+  function escapeText(s) {
+    return String(s || "").replace(/[&<>"']/g, function (ch) {
+      return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch];
+    });
+  }
+  function uniqueList(list) {
+    var seen = {};
+    var out = [];
+    (list || []).forEach(function (item) {
+      if (item && !seen[item]) { seen[item] = 1; out.push(item); }
+    });
+    return out;
+  }
+  function takeHtml(c) {
+    var bits = c.sf || 0;
+    var derived = derivedTake(c);
+    var goods = uniqueList(takeItems(bits, TAKE_GOOD).concat(derived.goods));
+    var bads = uniqueList(takeItems(bits, TAKE_BAD).concat(derived.bads));
+    if (goods.indexOf("Corner terrace") >= 0 || goods.indexOf("Extra-large aft terrace") >= 0) {
+      goods = goods.filter(function (g) { return g !== "Extra-large balcony"; });
+    }
+    var hasSpecificVenue = bads.some(function (b) {
+      return b.indexOf("Under ") === 0 || b.indexOf("Above ") === 0 || b === "Under the pool deck";
+    });
+    if ((bits & NOTE_BITS.near_pools) || hasSpecificVenue) {
+      bads = bads.filter(function (b) { return b !== "Near a noisy venue"; });
+    }
+    var comment = c.nt || "";
+    var verified = isVerified(c);
+    var how = verifiedHow(c);
+    var when = c.vw || c.sw || "";
+    var notes = c.vn || c.sn || "";
+    if (!goods.length && !bads.length && !comment && !(verified && (how || when || notes))) return "";
+    var parts = [];
+    parts.push('<div class="tcb-take"><h3>The Cruise Boys® Take:</h3>');
+    if (verified && how) {
+      parts.push('<p class="tcb-verified-how">' + escapeText(how) + (when ? " · " + escapeText(when) : "") + "</p>");
+    }
+    if (goods.length) {
+      parts.push('<ul class="tcb-take-good">' + goods.map(function (g) { return "<li>" + escapeText(g) + "</li>"; }).join("") + "</ul>");
+    }
+    if (bads.length) {
+      parts.push('<ul class="tcb-take-bad">' + bads.map(function (g) { return "<li>" + escapeText(g) + "</li>"; }).join("") + "</ul>");
+    }
+    if (comment) parts.push('<p class="tcb-take-comment">' + escapeText(comment) + "</p>");
+    if (verified && notes) {
+      parts.push('<div class="tcb-verified-notes"><span>The Cruise Boys® notes' +
+        (when && !how ? " · " + escapeText(when) : "") + "</span>" +
+        "<p>" + escapeText(notes) + "</p></div>");
+    }
+    parts.push("</div>");
+    return parts.join("");
+  }
+  function scoreHtml(c) {
+    var s = cabinScore(c);
+    var pre = ""; /* No Preliminary label (Robert, Nov 19 2026): only Verified cabins get a badge. */
+    return '<div class="tcb-score"><div class="tcb-score-num">' + s.total.toFixed(1) + "</div>" +
+      '<div class="tcb-score-copy"><div class="tcb-score-name">The Cruise Boys® Score</div>' +
+      '<div class="tcb-score-label">' + s.label + "</div>" +
+      '<p class="tcb-score-why">' + escapeText(s.why) + "</p></div>" + pre + "</div>";
+  }
+  function cardHtml(c) {
+    var meta = catMeta(c.c);
+    var flags = flagList(c.f || 0);
+    var side = SIDE[c.e] || c.e;
+    var sleeps = c.sl || meta.sleeps;
+    var chips = flags.map(function (f) { return '<span class="tcb-chip">' + f + "</span>"; }).join("");
+    if (c.d === 15) chips += '<span class="tcb-chip">On the deck below the pool deck and Richard’s Rooftop</span>';
+    var bed = bedLabel(c);
+    var verified = isVerified(c);
+    var badge = verified
+      ? '<span class="tcb-verified-badge">The Cruise Boys® Verified Cabin</span>'
+      : "";
+    return '<article class="tcb-cabin-card" data-cabin="' + c.n + '">' +
+      '<div class="tcb-card-top"><h2>' + c.n + "</h2><div class=\"tcb-badges\">" + badge + "</div></div>" +
+      "<p class=\"tcb-cat\">" + meta.name + (meta.family ? '<span class="tcb-family">' + meta.family + "</span>" : "") + "</p>" +
+      scoreHtml(c) +
+      '<div class="tcb-meta">' +
+        "<div><span>Ship</span><strong>" + shipName(state.ship) + "</strong></div>" +
+        "<div><span>Deck</span><strong>" + c.d + "</strong></div>" +
+        "<div><span>Side</span><strong>" + side + "</strong></div>" +
+        "<div><span>Sleeps (typical)</span><strong>" + sleeps + (meta.max && meta.max !== sleeps ? "–" + meta.max : "") + "</strong></div>" +
+        "<div><span>Category code</span><strong>" + c.c + "</strong></div>" +
+        "<div><span>Bed position</span>" + (bed ? "<strong>" + bed + "</strong>" : '<strong class="tcb-ask">Ask us</strong>') + "</div>" +
+      "</div>" +
+      (chips ? '<div class="tcb-chips">' + chips + "</div>" : "") +
+      takeHtml(c) +
+      "</article>";
+  }
+
+
+  /* ---- end Cabin Lookup helpers ---- */
+
+  var view = { ship: null, deck: null, scale: 1, fam: "", cat: "", selected: null, mode: "deck" };
+  var $ = function (id) { return document.getElementById(id); };
+  var vp = $("dm-viewport"), stage = $("dm-stage"), img = $("dm-img"), spotsEl = $("dm-spots");
+  var cabinIndex = {}, spotIndex = {};
+
+  function qs(name) { try { return new URLSearchParams(location.search).get(name) || ""; } catch (e) { return ""; } }
+  function loadScript(src) {
+    return new Promise(function (res, rej) {
+      var s = document.createElement("script"); s.src = BASE + src; s.async = true;
+      s.onload = res; s.onerror = function () { rej(new Error("Could not load " + src)); };
+      document.head.appendChild(s);
+    });
+  }
+  function ensureShip(id) {
+    var f = SHIP_INFO[id].file, jobs = [];
+    if (!SHIPS[id]) jobs.push(loadScript("assets/data/cabin-data-" + f + ".js"));
+    if (!MAPS[id]) jobs.push(loadScript("assets/data/hotspots-" + f + ".js"));
+    return Promise.all(jobs).then(function () {
+      if (!cabinIndex[id]) {
+        var m = {}; SHIPS[id].cabins.forEach(function (c) { m[c.n] = c; }); cabinIndex[id] = m;
+        var s = {}; Object.keys(MAPS[id].spots).forEach(function (d) { MAPS[id].spots[d].forEach(function (p) { s[p[0]] = +d; }); }); spotIndex[id] = s;
+      }
+    });
+  }
+  function deckList() {
+    var m = MAPS[view.ship], list = Object.keys(m.decks).map(Number).sort(function (a, b) { return a - b; });
+    return (m.overview ? ["all"] : []).concat(list);
+  }
+  function matches(c) {
+    if (view.cat) return c.c === view.cat;
+    if (view.fam) return catMeta(c.c).family === view.fam;
+    return false;
+  }
+  function filtering() { return !!(view.cat || view.fam); }
+
+  function renderShips() {
+    $("dm-ships").innerHTML = SHIP_ORDER.map(function (id) {
+      var on = id === view.ship;
+      return '<button type="button" data-ship="' + id + '" aria-pressed="' + on + '" class="' + (on ? "is-active" : "") + '">' + SHIP_INFO[id].name + "</button>";
+    }).join("");
+  }
+  function renderDecks() {
+    var m = MAPS[view.ship];
+    $("dm-decks").innerHTML = deckList().map(function (d) {
+      var on = String(d) === String(view.deck);
+      if (d === "all") return '<button type="button" data-deck="all" aria-pressed="' + on + '" class="' + (on ? "is-active" : "") + '">All decks</button>';
+      var count = 0;
+      if (filtering()) (m.spots[d] || []).forEach(function (p) { var c = cabinIndex[view.ship][p[0]]; if (c && matches(c)) count++; });
+      var cls = (on ? "is-active " : "") + (m.decks[d].count ? "" : "no-cabins");
+      var badge = count ? '<span class="dm-badge" aria-hidden="true">' + count + "</span>" : "";
+      var label = "Deck " + d + (m.decks[d].count ? ", " + m.decks[d].count + " cabins" : ", no cabins") + (count ? ", " + count + " highlighted" : "");
+      return '<button type="button" data-deck="' + d + '" aria-pressed="' + on + '" aria-label="' + label + '" class="' + cls + '">' + d + badge + "</button>";
+    }).join("");
+  }
+  function renderFilters() {
+    $("dm-fams").innerHTML = FAMILIES.map(function (f) {
+      var on = !view.cat && f.id === view.fam;
+      return '<button type="button" data-fam="' + f.id + '" aria-pressed="' + on + '" class="' + (on ? "is-active" : "") + '">' +
+        (f.sw ? '<span class="dm-sw" style="background:' + f.sw + '"></span>' : "") + f.label + "</button>";
+    }).join("");
+    var cats = SHIPS[view.ship].categories, fams = {};
+    var present = {}; SHIPS[view.ship].cabins.forEach(function (c) { present[c.c] = (present[c.c] || 0) + 1; });
+    Object.keys(cats).forEach(function (code) { if (!present[code]) return; var f = cats[code].family || "Other"; (fams[f] = fams[f] || []).push(code); });
+    var html = '<option value="">All categories</option>';
+    FAMILIES.slice(1).forEach(function (F) {
+      var list = fams[F.id]; if (!list) return;
+      html += '<optgroup label="' + F.label + '">' + list.sort(function (a, b) { return cats[a].name.localeCompare(cats[b].name); }).map(function (code) {
+        return '<option value="' + code + '">' + escapeText(cats[code].name) + " (" + present[code] + ")</option>";
+      }).join("") + "</optgroup>";
+    });
+    $("dm-cat").innerHTML = html; $("dm-cat").value = view.cat;
+  }
+
+  function stageSize() { var d = currentDeck(); return { w: d.w, h: d.h }; }
+  function currentDeck() {
+    var m = MAPS[view.ship];
+    if (view.deck === "all") return m.overview;
+    return m.decks[view.deck];
+  }
+  function applyScale(s, ax, ay) {
+    var sz = stageSize();
+    var min = Math.min(vp.clientWidth / sz.w, vp.clientHeight / sz.h) * 0.9;
+    s = Math.max(min, Math.min(s, 7));
+    if (ax == null) { ax = vp.clientWidth / 2; ay = vp.clientHeight / 2; }
+    var cx = (vp.scrollLeft + ax) / view.scale, cy = (vp.scrollTop + ay) / view.scale;
+    view.scale = s;
+    stage.style.width = sz.w * s + "px"; stage.style.height = sz.h * s + "px";
+    vp.scrollLeft = cx * s - ax; vp.scrollTop = cy * s - ay;
+    status();
+  }
+  /* horizontal extent of the ship on this deck: hull outline plus every cabin, with a small margin */
+  function shipRange(d) {
+    var x0 = d.fit[0], x1 = d.fit[2];
+    if (d.hull) { x0 = Math.min(x0, d.hull[0] - 6); x1 = Math.max(x1, d.hull[2] + 6); }
+    return [x0, x1];
+  }
+  function fitScale(d) { var r = shipRange(d); return Math.min(vp.clientWidth / (r[1] - r[0]), 2.4); }
+  function centerOnShip(d, s) { var r = shipRange(d); vp.scrollLeft = (r[0] + r[1]) / 2 * s - vp.clientWidth / 2; }
+  function fitShip() {
+    var d = currentDeck(); if (!d) return;
+    if (view.deck === "all" || !d.fit) return wholePage();
+    var s = fitScale(d);
+    view.scale = s; stage.style.width = d.w * s + "px"; stage.style.height = d.h * s + "px";
+    centerOnShip(d, s); vp.scrollTop = Math.max(0, d.fit[1] * s);
+    status();
+  }
+  function wholePage() {
+    var sz = stageSize();
+    var s = view.deck === "all" ? vp.clientWidth / sz.w : Math.min(vp.clientWidth / sz.w, (vp.clientHeight) / sz.h * 1.0);
+    if (view.deck !== "all" && vp.clientWidth < 600) s = vp.clientWidth / sz.w;
+    view.scale = s; stage.style.width = sz.w * s + "px"; stage.style.height = sz.h * s + "px";
+    vp.scrollLeft = 0; vp.scrollTop = 0; status();
+  }
+  function status() {
+    var m = MAPS[view.ship], t;
+    if (view.deck === "all") t = "All decks overview. Tap a deck to open it.";
+    else {
+      var d = m.decks[view.deck];
+      t = d.count ? "Drag to move. Pinch or + to zoom." : "No cabins on this deck. Zoom in to read the venues.";
+      if (filtering() && d.count) {
+        var n = 0; (m.spots[view.deck] || []).forEach(function (p) { var c = cabinIndex[view.ship][p[0]]; if (c && matches(c)) n++; });
+        t = n + " highlighted on this deck";
+      }
+    }
+    $("dm-status").textContent = t;
+  }
+
+  function renderSpots() {
+    var m = MAPS[view.ship], html = "";
+    spotsEl.className = "dm-spots" + (filtering() ? " is-filtering" : "");
+    if (view.deck === "all") {
+      var ov = m.overview, labels = ov.labels, keys = Object.keys(labels).map(Number).sort(function (a, b) { return a - b; });
+      keys.forEach(function (d, i) {
+        var x = labels[d][0], prev = i ? labels[keys[i - 1]][0] : x - 50, next = i < keys.length - 1 ? labels[keys[i + 1]][0] : x + 50;
+        var x0 = (x + prev) / 2, x1 = (x + next) / 2, y1 = labels[d][1] + 22;
+        html += '<button type="button" class="dm-deckzone" data-deck="' + d + '" aria-label="Open deck ' + d + '" style="left:' + (x0 / ov.w * 100) + "%;top:0;width:" + ((x1 - x0) / ov.w * 100) + "%;height:" + (y1 / ov.h * 100) + '%"></button>';
+      });
+    } else {
+      var d = m.decks[view.deck];
+      (m.spots[view.deck] || []).forEach(function (p) {
+        var c = cabinIndex[view.ship][p[0]], cls = "dm-spot";
+        if (c && filtering() && matches(c)) cls += " is-match";
+        if (p[0] === view.selected) cls += " is-selected";
+        var label = p[0] + (c ? ", " + catMeta(c.c).name : "");
+        html += '<button type="button" class="' + cls + '" data-cabin="' + p[0] + '" aria-label="Cabin ' + escapeText(label) + '" style="left:' + (p[1] / d.w * 100).toFixed(3) + "%;top:" + (p[2] / d.h * 100).toFixed(3) + "%;width:" + (p[3] / d.w * 100).toFixed(3) + "%;height:" + (p[4] / d.h * 100).toFixed(3) + '%"></button>';
+      });
+    }
+    spotsEl.innerHTML = html;
+  }
+
+  function setDeck(deck, opts) {
+    opts = opts || {};
+    view.deck = deck;
+    var m = MAPS[view.ship], d = currentDeck();
+    var name = SHIP_INFO[view.ship].name;
+    if (deck === "all") {
+      $("dm-deck-title").textContent = name + ": all decks";
+      $("dm-deck-sub").textContent = "Tap a deck to open it";
+      img.alt = "Official Virgin Voyages overview of every deck on " + name;
+    } else {
+      $("dm-deck-title").textContent = name + ": Deck " + deck;
+      $("dm-deck-sub").textContent = d.count ? d.count + " cabins. Tap one for details." : (DECK_NOTES[deck] || "No cabins on this deck");
+      img.alt = "Official Virgin Voyages deck plan for " + name + " Deck " + deck;
+    }
+    $("dm-loading").hidden = false;
+    var src = BASE + d.img;
+    img.onload = function () { $("dm-loading").hidden = true; };
+    img.onerror = function () { $("dm-loading").textContent = "The deck plan image did not load. Please refresh the page."; };
+    if (img.getAttribute("src") !== src) img.setAttribute("src", src); else $("dm-loading").hidden = true;
+    renderDecks(); renderSpots();
+    var act = $("dm-decks").querySelector(".is-active"), row = $("dm-decks");
+    if (act && row.scrollWidth > row.clientWidth) row.scrollLeft = act.offsetLeft - row.clientWidth / 2 + act.offsetWidth / 2;
+    if (opts.focus) focusCabin(opts.focus);
+    else if (deck !== "all" && d.count) fitShip(); else wholePage();
+    syncUrl();
+  }
+  function setShip(id, opts) {
+    $("dm-loading").hidden = false;
+    return ensureShip(id).then(function () {
+      view.ship = id; state.ship = id; view.selected = null;
+      if (view.cat && !SHIPS[id].categories[view.cat]) view.cat = "";
+      renderShips(); renderFilters();
+      $("dm-source").textContent = "Source: official Virgin Voyages " + SHIP_INFO[id].source + ". " + (MAPS[id].overview ? "" : "An all-decks overview is not available for " + SHIP_INFO[id].name + " yet.");
+      showEmpty();
+      var deck = (opts && opts.deck) || (MAPS[id].decks[8] ? 8 : deckList()[0]);
+      setDeck(deck, opts);
+    }).catch(function (e) {
+      $("dm-loading").textContent = "The deck plan data did not load. Please refresh the page.";
+    });
+  }
+
+  function focusCabin(n) {
+    var m = MAPS[view.ship], deck = spotIndex[view.ship][n];
+    if (!deck) return;
+    if (String(deck) !== String(view.deck)) { setDeck(deck, { focus: n }); return; }
+    view.selected = n;
+    renderSpots();
+    var p = m.spots[deck].filter(function (q) { return q[0] === n; })[0];
+    var d = m.decks[deck], fs = fitScale(d);
+    /* keep the user's zoom if they zoomed in past "fit ship"; otherwise use fit ship */
+    var target = view.scale > fs * 1.05 ? view.scale : fs;
+    view.scale = target;
+    stage.style.width = d.w * target + "px"; stage.style.height = d.h * target + "px";
+    var phone = isPhone(), r = shipRange(d);
+    if ((r[1] - r[0]) * target <= vp.clientWidth + 1) centerOnShip(d, target);  /* whole ship fits: centre the ship */
+    else vp.scrollLeft = (p[1] + p[3] / 2) * target - vp.clientWidth / 2;       /* zoomed in: centre the cabin */
+    vp.scrollTop = (p[2] + p[4] / 2) * target - vp.clientHeight * (phone ? 0.22 : 0.5);
+    status();
+    var vr = vp.closest(".dm-viewer").getBoundingClientRect();
+    if (phone || vr.top < 0 || vr.bottom > window.innerHeight) vp.closest(".dm-viewer").scrollIntoView({ block: phone ? "start" : "center" });
+    showCabin(n);
+  }
+  function isPhone() { return window.matchMedia && window.matchMedia("(max-width: 960px)").matches; }
+  function keepAboveSheet(el) {
+    if (!isPhone() || !el) return;
+    var r = el.getBoundingClientRect();
+    if (r.bottom > window.innerHeight * 0.46) window.scrollBy(0, r.top - window.innerHeight * 0.25);
+  }
+  function showEmpty() {
+    $("dm-card").innerHTML = '<div class="dm-empty"><h2>Tap a cabin</h2><p>Tap or click any cabin number on the deck plan to see its details here.</p><p>Zoom in with + or a pinch, and drag to move around the ship.</p></div>';
+    $("dm-cardwrap").classList.remove("is-open");
+  }
+  function showCabin(n) {
+    var c = cabinIndex[view.ship][n];
+    if (!c) return;
+    view.selected = n;
+    var subject = encodeURIComponent("Price this cruise: " + SHIP_INFO[view.ship].name + " cabin " + n);
+    $("dm-card").innerHTML = cardHtml(c) +
+      '<div class="dm-card-actions">' +
+      '<a class="dm-btn dm-btn-primary" href="https://book.thecruiseboys.com/form/jfarfkpn2q70" target="_blank" rel="noopener">Price this cruise</a>' +
+      '<a class="dm-btn dm-btn-ghost" href="mailto:Info@TheCruiseBoys.com?subject=' + subject + '">Email Info@TheCruiseBoys.com</a>' +
+      '<a class="dm-btn dm-btn-ghost" href="sms:+13213005580">Text 321-300-5580</a></div>' +
+      '<p class="dm-cl-link"><a href="https://www.thecruiseboys.com/cabin-lookup?ship=' + view.ship + '&amp;cabin=' + encodeURIComponent(n) + '" target="_blank" rel="noopener">Open ' + n + ' in Cabin Lookup</a></p>';
+    $("dm-cardwrap").classList.add("is-open");
+    Array.prototype.forEach.call(spotsEl.querySelectorAll(".is-selected"), function (el) { el.classList.remove("is-selected"); });
+    var el = spotsEl.querySelector('[data-cabin="' + n + '"]'); if (el) el.classList.add("is-selected");
+    syncUrl();
+  }
+  function syncUrl() {
+    try {
+      var u = new URL(location.href);
+      u.searchParams.set("ship", view.ship); u.searchParams.set("deck", view.deck);
+      if (view.selected) u.searchParams.set("cabin", view.selected); else u.searchParams.delete("cabin");
+      history.replaceState(null, "", u.toString());
+    } catch (e) {}
+  }
+
+  function find(q) {
+    var msg = $("dm-findmsg"), raw = String(q || "").toUpperCase().replace(/[^0-9A-Z]/g, "");
+    if (!raw) { msg.textContent = "Type a cabin number such as 9254A."; return; }
+    var idx = cabinIndex[view.ship], name = SHIP_INFO[view.ship].name;
+    if (idx[raw] && spotIndex[view.ship][raw]) { msg.textContent = "Cabin " + raw + " is on Deck " + spotIndex[view.ship][raw] + "."; focusCabin(raw); return; }
+    var hits = Object.keys(idx).filter(function (n) { return n.replace(/[A-Z]$/, "") === raw.replace(/[A-Z]$/, ""); });
+    if (/^\d+$/.test(raw) && hits.length === 1) { msg.textContent = "Cabin " + hits[0] + " is on Deck " + idx[hits[0]].d + "."; focusCabin(hits[0]); return; }
+    if (hits.length) {
+      msg.innerHTML = "Pick a side: " + hits.sort().map(function (n) { return '<button type="button" data-goto="' + n + '">' + n + " (" + (SIDE[idx[n].e] || idx[n].e) + ")</button>"; }).join("");
+      return;
+    }
+    var other = SHIP_ORDER.filter(function (id) { return id !== view.ship && cabinIndex[id] && cabinIndex[id][raw]; });
+    msg.textContent = "We could not find cabin " + raw + " on " + name + ". Check the number, or ask The Cruise Boys® and we will look it up.";
+  }
+
+  /* ---- events ---- */
+  $("dm-ships").addEventListener("click", function (e) { var b = e.target.closest("[data-ship]"); if (b && b.getAttribute("data-ship") !== view.ship) { $("dm-findmsg").textContent = ""; setShip(b.getAttribute("data-ship")); } });
+  $("dm-decks").addEventListener("click", function (e) { var b = e.target.closest("[data-deck]"); if (!b) return; var d = b.getAttribute("data-deck"); setDeck(d === "all" ? "all" : +d); });
+  spotsEl.addEventListener("click", function (e) {
+    if (dragMoved) return;
+    var z = e.target.closest("[data-deck]"); if (z) { setDeck(+z.getAttribute("data-deck")); return; }
+    var b = e.target.closest("[data-cabin]"); if (b) { showCabin(b.getAttribute("data-cabin")); keepAboveSheet(b); }
+  });
+  $("dm-fams").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-fam]"); if (!b) return;
+    view.fam = b.getAttribute("data-fam"); view.cat = ""; $("dm-cat").value = "";
+    renderFilters(); renderDecks(); renderSpots(); status();
+  });
+  $("dm-cat").addEventListener("change", function () { view.cat = this.value; if (view.cat) view.fam = ""; renderFilters(); renderDecks(); renderSpots(); status(); });
+  $("dm-findform").addEventListener("submit", function (e) { e.preventDefault(); find($("dm-find").value); });
+  $("dm-findmsg").addEventListener("click", function (e) { var b = e.target.closest("[data-goto]"); if (b) { $("dm-findmsg").textContent = "Cabin " + b.getAttribute("data-goto") + " selected."; focusCabin(b.getAttribute("data-goto")); } });
+  $("dm-zoom-in").addEventListener("click", function () { applyScale(view.scale * 1.4); });
+  $("dm-zoom-out").addEventListener("click", function () { applyScale(view.scale / 1.4); });
+  $("dm-fit").addEventListener("click", fitShip);
+  $("dm-page").addEventListener("click", wholePage);
+  $("dm-sheet-close").addEventListener("click", function () { $("dm-cardwrap").classList.remove("is-open"); });
+  vp.addEventListener("wheel", function (e) {
+    if (!(e.ctrlKey || e.metaKey)) return;
+    e.preventDefault(); var r = vp.getBoundingClientRect();
+    applyScale(view.scale * (e.deltaY < 0 ? 1.15 : 1 / 1.15), e.clientX - r.left, e.clientY - r.top);
+  }, { passive: false });
+  vp.addEventListener("keydown", function (e) {
+    if (e.key === "+" || e.key === "=") { applyScale(view.scale * 1.4); e.preventDefault(); }
+    if (e.key === "-") { applyScale(view.scale / 1.4); e.preventDefault(); }
+  });
+  /* pinch to zoom (two fingers) and mouse drag to pan */
+  var pts = {}, pinch = null, drag = null, dragMoved = false;
+  vp.addEventListener("pointerdown", function (e) {
+    pts[e.pointerId] = { x: e.clientX, y: e.clientY };
+    var ids = Object.keys(pts);
+    if (ids.length === 2) {
+      var a = pts[ids[0]], b = pts[ids[1]], r = vp.getBoundingClientRect();
+      pinch = { d: Math.hypot(a.x - b.x, a.y - b.y), s: view.scale, mx: (a.x + b.x) / 2 - r.left, my: (a.y + b.y) / 2 - r.top };
+      drag = null;
+    } else if (e.pointerType === "mouse" && e.button === 0) {
+      drag = { x: e.clientX, y: e.clientY, sl: vp.scrollLeft, st: vp.scrollTop }; dragMoved = false;
+    }
+  });
+  vp.addEventListener("pointermove", function (e) {
+    if (!pts[e.pointerId]) return;
+    pts[e.pointerId] = { x: e.clientX, y: e.clientY };
+    var ids = Object.keys(pts);
+    if (pinch && ids.length === 2) {
+      var a = pts[ids[0]], b = pts[ids[1]], d = Math.hypot(a.x - b.x, a.y - b.y);
+      applyScale(pinch.s * d / pinch.d, pinch.mx, pinch.my); e.preventDefault();
+    } else if (drag) {
+      var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      if (Math.abs(dx) + Math.abs(dy) > 4) dragMoved = true;
+      if (dragMoved) { vp.scrollLeft = drag.sl - dx; vp.scrollTop = drag.st - dy; }
+    }
+  });
+  function endPtr(e) { delete pts[e.pointerId]; if (Object.keys(pts).length < 2) pinch = null; if (drag) { drag = null; setTimeout(function () { dragMoved = false; }, 0); } }
+  vp.addEventListener("pointerup", endPtr); vp.addEventListener("pointercancel", endPtr); vp.addEventListener("pointerleave", endPtr);
+  var rz; window.addEventListener("resize", function () { clearTimeout(rz); rz = setTimeout(function () { if (view.ship && MAPS[view.ship]) status(); }, 150); });
+
+  /* ---- start ---- */
+  var aliases = { s: "scarlet-lady", scarlet: "scarlet-lady", v: "valiant-lady", valiant: "valiant-lady", r: "resilient-lady", resilient: "resilient-lady", b: "brilliant-lady", brilliant: "brilliant-lady" };
+  var qShip = qs("ship").toLowerCase(); qShip = SHIP_INFO[qShip] ? qShip : (aliases[qShip] || "scarlet-lady");
+  var qDeck = qs("deck"), qCabin = qs("cabin").toUpperCase();
+  setShip(qShip, { deck: qDeck === "all" ? "all" : (+qDeck || null) }).then(function () {
+    if (qCabin && cabinIndex[view.ship][qCabin]) { $("dm-find").value = qCabin; focusCabin(qCabin); }
+  });
+})();
+</script>
+<!-- TCB DECK PLANS END -->
+</body>
+</html>

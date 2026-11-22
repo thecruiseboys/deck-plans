@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://thecruiseboys.github.io/deck-plans/sitemap.xml

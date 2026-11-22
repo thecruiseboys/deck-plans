@@ -880,7 +880,7 @@
     { id: "RockStar", label: "RockStar", sw: "#B39B5B" },
     { id: "Mega RockStar", label: "Mega RockStar", sw: "#E8336D" }
   ];
-  var DECK_NOTES = { 4: "Tender and boarding deck", 6: "Restaurants, bars and shops", 7: "Restaurants, bars and The Red Room", 16: "Pools, sports and Richard's Rooftop", 17: "The Perch and The Runway" };
+  var DECK_NOTES = { 4: "Tender and boarding deck", 6: "Restaurants, bars and shops", 7: "Restaurants, bars and The Red Room", 15: "The pool deck, just below Richard's Rooftop", 16: "Richard's Rooftop and sports", 17: "The Perch and The Runway" };
   var SHIPS = window.TCB_SHIP_DATA = window.TCB_SHIP_DATA || {};
   var MAPS = window.TCB_DECKMAP = window.TCB_DECKMAP || {};
 
@@ -1127,7 +1127,7 @@
       }
       return fallback;
     }
-    if (applied.indexOf("under_pool") >= 0) whyBits.push("under the pool deck");
+    if (applied.indexOf("under_pool") >= 0) whyBits.push(c.d === 15 ? "on the pool deck" : "under the pool deck");
     if (applied.indexOf("under_galley") >= 0) whyBits.push("under The Galley");
     if (applied.indexOf("over_theater") >= 0 || applied.indexOf("under_theater") >= 0) whyBits.push("next to The Red Room");
     if (applied.indexOf("over_bar") >= 0) whyBits.push("above " + venueName("b", "a bar"));
@@ -1210,8 +1210,9 @@
     if (goods.indexOf("Corner terrace") >= 0 || goods.indexOf("Extra-large aft terrace") >= 0) {
       goods = goods.filter(function (g) { return g !== "Extra-large balcony"; });
     }
+    if (c.d === 15) bads = bads.map(function (b) { return b === "Under the pool deck" ? "On the pool deck" : b; });
     var hasSpecificVenue = bads.some(function (b) {
-      return b.indexOf("Under ") === 0 || b.indexOf("Above ") === 0 || b === "Under the pool deck";
+      return b.indexOf("Under ") === 0 || b.indexOf("Above ") === 0 || b === "Under the pool deck" || b === "On the pool deck";
     });
     if ((bits & NOTE_BITS.near_pools) || hasSpecificVenue) {
       bads = bads.filter(function (b) { return b !== "Near a noisy venue"; });
@@ -1256,7 +1257,7 @@
     var side = SIDE[c.e] || c.e;
     var sleeps = c.sl || meta.sleeps;
     var chips = flags.map(function (f) { return '<span class="tcb-chip">' + f + "</span>"; }).join("");
-    if (c.d === 15) chips += '<span class="tcb-chip">On the deck below the pool deck and Richard’s Rooftop</span>';
+    if (c.d === 15) chips += '<span class="tcb-chip">On the pool deck and below Richard’s Rooftop</span>';
     var bed = bedLabel(c);
     var verified = isVerified(c);
     var badge = verified
